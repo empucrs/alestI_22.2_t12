@@ -88,10 +88,24 @@ public class GenericTree {
         return null;
     }
     public void setRoot(Integer e){
-        if((root!=null)&&(e!=null))
-            root.value=e;
+        if(e!=null)
+            if(root==null)
+                add(e, null);
+            else
+                root.value=e;
     }
     public Integer getParent(Integer e){
+        if(e!=null){
+            TreeNode aux = searchNode(e, root);
+            // o elemento não existe
+            if(aux==null)
+                return null;
+            // o elemento é raiz
+            if(aux==root)
+                return null;
+            // o elemento não é raiz
+            return aux.father.value;
+        }
         return null;
     }
     public boolean removeBranch(Integer e){
